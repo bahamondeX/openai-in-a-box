@@ -81,7 +81,7 @@ logger = get_logger()
 
 
 def exception_handler(
-    func: Callable[P, T]
+    func: Callable[P, T],
 ) -> Callable[P, Union[T, Coroutine[None, T, T]]]:
     """
     Decorator to handle exceptions in a function.
@@ -120,7 +120,7 @@ def exception_handler(
 
 
 def timing_handler(
-    func: Callable[P, T]
+    func: Callable[P, T],
 ) -> Callable[P, Union[T, Coroutine[None, T, T]]]:
     """
     Decorator to measure the time taken by a function.
@@ -271,4 +271,4 @@ def merge_dicts(*, dicts: Iterable[T]) -> T:
     """
     Merges multiple dictionaries into one.
     """
-    return {k: v for d in dicts for k, v in d.items()} # type: ignore
+    return {k: v for d in dicts for k, v in d.items()}  # type: ignore

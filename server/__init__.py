@@ -13,14 +13,15 @@ from .api import (
 
 
 def create_app(
-    *, title: str, description: str, version: str, docs_url: str, openapi_url: str
+    *, title: str, description: str, version: str
 ):
     app = FastAPI(
         title=title,
         description=description,
         version=version,
-        openapi_url=openapi_url,
-        docs_url=docs_url,
+        docs_url="/v1/docs",
+        redoc_url="/v1/redoc",
+        openapi_url="/v1/openapi.json",  # Explicitly enable OpenAPI schema
     )
     app.add_middleware(
         CORSMiddleware,

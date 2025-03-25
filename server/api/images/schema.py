@@ -9,7 +9,8 @@ NEGATIVE_PROMPT = "distorted, deformed, mutated, disfigured, ugly, grotesque, bl
 class TextToImageParams(BaseModel):
     text: str = Field(..., description="Input text for image generation")
     negativeText: tp.Optional[str] = Field(
-        default=NEGATIVE_PROMPT, description="Negative prompt to avoid unwanted features"
+        default=NEGATIVE_PROMPT,
+        description="Negative prompt to avoid unwanted features",
     )
 
 
@@ -43,20 +44,23 @@ class ImageGenerationConfig(BaseModel):
 
 
 class Payload(BaseModel):
-    taskType: tp.Literal["TEXT_IMAGE", "INPAINTING", "IMAGE_VARIATION","BACKGROUND_REMOVAL"] = Field(default="TEXT_IMAGE")
+    taskType: tp.Literal[
+        "TEXT_IMAGE", "INPAINTING", "IMAGE_VARIATION", "BACKGROUND_REMOVAL"
+    ] = Field(default="TEXT_IMAGE")
     imageGenerationConfig: ImageGenerationConfig = Field(
         default_factory=ImageGenerationConfig,
         description="General image generation configuration parameters such as `cfgScale:int`, `seed:int`, `width:int`, `height:int`, `numberOfImages:int`.",
     )
 
+
 class TextToImagePayLoad(Payload):
-    taskTyoe:tp.Literal["TEXT_IMAGE"] = Field(default="TEXT_IMAGE")
+    taskTyoe: tp.Literal["TEXT_IMAGE"] = Field(default="TEXT_IMAGE")
     textToImageParams: TextToImageParams
 
 
 class ImageVariationPayLoad(Payload):
     imageVariationParams: ImageVariationParams
-    
+
 
 class InPaintingPayLoad(Payload):
     inPaintingParams: InPaintingParams
@@ -67,5 +71,8 @@ class BackgroundRemovalPayLoad(Payload):
 
 
 ImagePayload: tpe.TypeAlias = tp.Union[
-    InPaintingPayLoad, ImageVariationPayLoad, TextToImagePayLoad, BackgroundRemovalPayLoad
+    InPaintingPayLoad,
+    ImageVariationPayLoad,
+    TextToImagePayLoad,
+    BackgroundRemovalPayLoad,
 ]

@@ -1,5 +1,4 @@
 from __future__ import annotations
-import torch
 import asyncio
 import base64c as base64  # type: ignore
 import json
@@ -296,15 +295,3 @@ def merge_dicts(*dicts: dict[str, T]) -> dict[str, T]:
     Merges multiple dictionaries into one.
     """
     return {k: v for d in dicts for k, v in d.items()}
-
-
-def get_device() -> torch.device:
-    """
-    Returns the device to use for the model.
-    """
-    if torch.cuda.is_available():
-        return torch.device("cuda")
-    elif torch.backends.mps.is_available():
-        return torch.device("mps")
-    else:
-        return torch.device("cpu")

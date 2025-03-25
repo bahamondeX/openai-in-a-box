@@ -11,7 +11,6 @@ __all__ = [
     "chat_app",
     "completions_app",
     "models_app",
-    "speech_app",
     "translations_app",
     "transcriptions_app",
     "images_app",
